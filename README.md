@@ -8,8 +8,10 @@ using Program Derived Addresses (PDAs) and System Program CPIs with PDA signing.
 
 ## Assignment Overview
 
-The assignment requirement:
-> **1. Write the vault program and include the withdraw and close instructions.**
+The assignment requirements:
+
+> **1. Write the vault program and include the withdraw and close instructions.**  
+> **2. Include a screenshot showing all tests passing.**
 
 - **`withdraw`**: Safely transfers SOL from the `vault` PDA back to the user
   via CPI with PDA signing (`[b"vault", user, &[bump]]`), verifying that the vault
@@ -17,7 +19,7 @@ The assignment requirement:
 - **`close`**: Sweeps all remaining lamports from the `vault` PDA back to the
   user and closes the `vault_state` PDA account.
 
-*(The `initialize` and `deposit` instructions serve as the foundation).*
+_(The `initialize` and `deposit` instructions serve as the foundation)._
 
 ---
 
@@ -61,15 +63,21 @@ Execute the integration test suite:
 cargo test
 ```
 
-*(or run `anchor test`)*
+_(or run `anchor test`)_
+
+### 3. Test Results
+
+Screenshot showing all tests passing:
+
+![All Tests Passing](screenshots/test.png)
 
 ---
 
 ## Instructions Summary
 
-| Instruction | Description | Accounts / Signers |
-| :--- | :--- | :--- |
-| `initialize` | Initializes `VaultState` and funds rent exemption | `user` (Signer), `vault_state`, `vault` |
-| `deposit` | Transfers SOL from user to `vault` PDA | `user` (Signer), `vault_state`, `vault` |
-| **`withdraw`** *(Implemented)* | Withdraws SOL to user; validates rent exemption; signs via PDA seeds | `user` (Signer), `vault_state`, `vault` (PDA Signer) |
-| **`close`** *(Implemented)* | Sweeps all vault lamports to user and closes `vault_state` | `user` (Signer), `vault_state` (closed), `vault` (PDA Signer) |
+| Instruction                    | Description                                                          | Accounts / Signers                                            |
+| :----------------------------- | :------------------------------------------------------------------- | :------------------------------------------------------------ |
+| `initialize`                   | Initializes `VaultState` and funds rent exemption                    | `user` (Signer), `vault_state`, `vault`                       |
+| `deposit`                      | Transfers SOL from user to `vault` PDA                               | `user` (Signer), `vault_state`, `vault`                       |
+| **`withdraw`** _(Implemented)_ | Withdraws SOL to user; validates rent exemption; signs via PDA seeds | `user` (Signer), `vault_state`, `vault` (PDA Signer)          |
+| **`close`** _(Implemented)_    | Sweeps all vault lamports to user and closes `vault_state`           | `user` (Signer), `vault_state` (closed), `vault` (PDA Signer) |
